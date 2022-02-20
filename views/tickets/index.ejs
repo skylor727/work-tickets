@@ -38,10 +38,16 @@
         <button id="myBtn" type="submit">New Ticket</button>
     </section>
     <h2>Active</h2>
-    <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure tempore corporis eum quisquam doloribus minima
-        animi
-        praesentium nihil voluptatibus nesciunt rem iusto suscipit velit pariatur, odit nulla veritatis rerum officia.
-    </p>
+    <div class="ticket-info-container">
+        <% tasks.rows.forEach((task, idx)=> { %>
+            <p>Ticket ID: <%= task.id %> </p>
+            <p>Ticket Subject: <%= task.subject %> </p>
+            <p>Ticket Description: <%= task.description %> </p>
+            <p>Assigned Employee: <%= task.assigned_to %> </p>
+            <hr>
+            <% }) %>
+
+    </div>
     <h2>Closed</h2>
     <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure tempore corporis eum quisquam doloribus minima
         animi
