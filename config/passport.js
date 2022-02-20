@@ -14,7 +14,7 @@ passport.use(
       let user = {};
       try {
         const currentUserQuery = await pool.query(
-          "SELECT * FROM users WHERE google_id =$1",
+          "SELECT * FROM users WHERE google_id=$1",
           [account.sub]
         );
         //USER DOES NOT EXIST

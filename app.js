@@ -13,7 +13,7 @@ require("./config/database");
 require("./config/passport");
 
 var indexRouter = require("./routes/index");
-
+var ticketsRouter = require("./routes/tickets");
 var app = express();
 
 // view engine setup
@@ -43,6 +43,7 @@ app.use((req, res, next) => {
 const isLoggedIn = require("./config/auth");
 
 app.use("/", indexRouter);
+app.use("/tickets", isLoggedIn, ticketsRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
