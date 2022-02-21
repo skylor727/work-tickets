@@ -6,7 +6,8 @@ const getRandom = (min, max) => {
 
 const index = async (req, res) => {
   const tasks = await pool.query("SELECT * FROM tasks;");
-  res.render("tickets/index", { tasks });
+  const users = await pool.query("SELECT * FROM users");
+  res.render("tickets/index", { tasks, users });
 };
 
 const create = async (req, res) => {

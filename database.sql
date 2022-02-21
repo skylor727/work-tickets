@@ -10,7 +10,6 @@ CREATE TABLE tasks (
 id SERIAL PRIMARY KEY,
 subject VARCHAR(255) NOT NULL,
 description VARCHAR(255) NOT NULL,
-assigned_to INT references users(id) NOT NULL,
-is_active BOOLEAN NOT NULL DEFAULT False,
-created_by INT references users(id) NOT NULL
-);
+assigned_to INT references users(username) NOT NULL,
+is_active BOOLEAN NOT NULL DEFAULT True,
+created_by VARCHAR(255) references users(username) NOT NULL

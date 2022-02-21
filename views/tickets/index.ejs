@@ -39,18 +39,48 @@
     </section>
     <h2>Active</h2>
     <div class="ticket-info-container">
-        <% tasks.rows.forEach((task, idx)=> { %>
-            <p>Ticket ID: <%= task.id %> </p>
-            <p>Ticket Subject: <%= task.subject %> </p>
-            <p>Ticket Description: <%= task.description %> </p>
-            <p>Assigned Employee: <%= task.assigned_to %> </p>
-            <hr>
-            <% }) %>
+        <% if(!tasks.rows) { %>
+            <h3>No Tickets Exist </h3>
+            <%}%>
+                <% tasks.rows.forEach((task)=> { %>
+                    <% if (task.is_active===true) { %>
+                        <p>Ticket ID: <%= task.id %>
+                        </p>
+                        <p>Ticket Subject: <%= task.subject %>
+                        </p>
+                        <p>Ticket Description: <%= task.description %>
+                        </p>
+                        <p>Assigned Employee: <%= users.rows[task.assigned_to].username %>
+                        </p>
+                        <p>Submitted By: <%= users.rows[task.created_by] %>
+                        </p>
+                        <p>Ticket Status: Open
+                        </p>
+                        <hr>
+                        <% } %>
+                            <% }) %>
 
     </div>
     <h2>Closed</h2>
-    <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure tempore corporis eum quisquam doloribus minima
-        animi
-        praesentium nihil voluptatibus nesciunt rem iusto suscipit velit pariatur, odit nulla veritatis rerum officia.
-    </p>
-    <%- include('../partials/footer') %>
+    <% if(!tasks.rows) { %>
+        <h3>No Closed Tickets</h3>
+        <% } %>
+            <% tasks.rows.forEach((task)=> { %>
+                <% if(task.is_active===false) { %>
+                    <p>Ticket ID: <%= task.id %>
+                    </p>
+                    <p>Ticket Subject: <%= task.subject %>
+                    </p>
+                    <p>Ticket Description: <%= task.description %>
+                    </p>
+                    <p>Assigned Employee: <%= users.rows[task.assigned_to].username %>
+                    </p>
+                    <p>Submitted By: <%= users.rows[task.created_by] %>
+                    </p>
+                    <p>Ticket Status: Closed
+                    </p>
+                    <hr>
+                    <% } %>
+                        <% }) %>
+
+                            <%- include('../partials/footer') %>
