@@ -1,4 +1,31 @@
 <%- include('../partials/header') %>
-<h1>Ticket Details</h1>
-<p><%= JSON.stringify(task.rows[0]) %></p>
-<%- include('../partials/footer') %>
+    <h1>Ticket Details</h1>
+    <% task.rows.forEach((tsk)=> { %>
+
+        <form>
+            <p>Ticket ID: <%= tsk.id %>
+            </p>
+            <p>Ticket Subject: <%= tsk.subject %>
+            </p>
+            <p>Ticket Description: <%= tsk.description %>
+            </p>
+            <p>Assigned Employee: <%= users.rows[tsk.assigned_to].username %>
+            </p>
+            <p>Submitted By: <%= users.rows[tsk.created_by] %>
+            </p>
+            <p>Ticket Status: <%- tsk.is_active === false ? 'Closed' : 'Open' %>
+            </p>
+            <% if (user.id===tsk.created_by) { %>
+                <button>
+                    Edit Ticket
+                </button>
+                <button>
+                    Delete Ticket
+                </button>
+        </form>
+        <hr>
+        <% } %>
+            <% }) %>
+
+                </div>
+                <%- include('../partials/footer') %>

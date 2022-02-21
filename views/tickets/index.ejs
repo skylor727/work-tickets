@@ -44,7 +44,6 @@
             <%}%>
                 <% tasks.rows.forEach((task)=> { %>
                     <% if (task.is_active===true) { %>
-                        <form>
                             <p>Ticket ID: <%= task.id %>
                             </p>
                             <p>Ticket Subject: <%= task.subject %>
@@ -58,16 +57,6 @@
                             <p>Ticket Status: Open
                             </p>
                             <a href="/tickets/ <%= task.id %>">Details</a>
-                            <% if (user.id===task.created_by) { %>
-
-                                <button>
-                                    Edit Ticket
-                                </button>
-                                <button>
-                                    Delete Ticket
-                                </button>
-                        </form>
-                        <% } %>
                             <hr>
                             <% } %>
                                 <% }) %>
@@ -91,6 +80,7 @@
                     </p>
                     <p>Ticket Status: Closed
                     </p>
+                    <a href="/tickets/ <%= task.id %>">Details</a>
                     <hr>
                     <% } %>
                         <% }) %>

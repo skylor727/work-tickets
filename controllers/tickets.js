@@ -49,19 +49,21 @@ const create = async (req, res) => {
   insertTask(insertQuery);
 };
 
-// const update = async (req, res) => {
-//   console.log(req.body);
-// }
+const update = async (req, res) => {
+  console.log(req.body);
+}
 
 const show = async (req, res) => {
   const task = await pool.query(
     `SELECT * FROM tasks WHERE id=${req.params.id}`
   );
-  res.render("tickets/show", { task });
+  const users = await pool.query(`SELECT * FROM users`)
+  res.render("tickets/show", {task, users});
 };
 
 module.exports = {
   index,
   create,
   show,
+  update,
 };
