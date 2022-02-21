@@ -44,21 +44,33 @@
             <%}%>
                 <% tasks.rows.forEach((task)=> { %>
                     <% if (task.is_active===true) { %>
-                        <p>Ticket ID: <%= task.id %>
-                        </p>
-                        <p>Ticket Subject: <%= task.subject %>
-                        </p>
-                        <p>Ticket Description: <%= task.description %>
-                        </p>
-                        <p>Assigned Employee: <%= users.rows[task.assigned_to].username %>
-                        </p>
-                        <p>Submitted By: <%= users.rows[task.created_by] %>
-                        </p>
-                        <p>Ticket Status: Open
-                        </p>
-                        <hr>
+                        <form>
+                            <p>Ticket ID: <%= task.id %>
+                            </p>
+                            <p>Ticket Subject: <%= task.subject %>
+                            </p>
+                            <p>Ticket Description: <%= task.description %>
+                            </p>
+                            <p>Assigned Employee: <%= users.rows[task.assigned_to].username %>
+                            </p>
+                            <p>Submitted By: <%= users.rows[task.created_by] %>
+                            </p>
+                            <p>Ticket Status: Open
+                            </p>
+                            <a href="/tickets/ <%= task.id %>">Details</a>
+                            <% if (user.id===task.created_by) { %>
+
+                                <button>
+                                    Edit Ticket
+                                </button>
+                                <button>
+                                    Delete Ticket
+                                </button>
+                        </form>
                         <% } %>
-                            <% }) %>
+                            <hr>
+                            <% } %>
+                                <% }) %>
 
     </div>
     <h2>Closed</h2>

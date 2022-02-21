@@ -7,6 +7,8 @@ router.get("/", ticketsCtrl.index);
 
 router.post("/create", ticketsCtrl.create);
 
+router.get("/:id", ticketsCtrl.show);
+
 // router.get('/', ticketsCtrl.create)
 
 module.exports = router;

@@ -7,6 +7,10 @@ const getRandom = (min, max) => {
 const index = async (req, res) => {
   const tasks = await pool.query("SELECT * FROM tasks;");
   const users = await pool.query("SELECT * FROM users");
+  const activeUser = await pool.query(
+    `SELECT * from users WHERE id=${req.user.id}`
+  );
+  console.log(activeUser);
   res.render("tickets/index", { tasks, users });
 };
 
@@ -45,7 +49,19 @@ const create = async (req, res) => {
   insertTask(insertQuery);
 };
 
+// const update = async (req, res) => {
+//   console.log(req.body);
+// }
+
+const show = async (req, res) => {
+  const task = await pool.query(
+    `SELECT * FROM tasks WHERE id=${req.params.id}`
+  );
+  res.render("tickets/show", { task });
+};
+
 module.exports = {
   index,
   create,
+  show,
 };
