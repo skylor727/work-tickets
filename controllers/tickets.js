@@ -51,14 +51,17 @@ const create = async (req, res) => {
 
 const update = async (req, res) => {
   console.log(req.body);
-}
+};
 
+const deleteTask = async (req, res) => {
+  console.log(req.body);
+};
 const show = async (req, res) => {
   const task = await pool.query(
     `SELECT * FROM tasks WHERE id=${req.params.id}`
   );
-  const users = await pool.query(`SELECT * FROM users`)
-  res.render("tickets/show", {task, users});
+  const users = await pool.query(`SELECT * FROM users`);
+  res.render("tickets/show", { task, users });
 };
 
 module.exports = {
@@ -66,4 +69,5 @@ module.exports = {
   create,
   show,
   update,
+  delete: deleteTask,
 };
