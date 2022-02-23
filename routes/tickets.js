@@ -9,6 +9,6 @@ router.post("/create", ticketsCtrl.create);
 
 router.get("/:id", ticketsCtrl.show);
 
-// router.get('/', ticketsCtrl.create)
+router.delete('/:id', ticketsCtrl.delete);
 
 module.exports = router;

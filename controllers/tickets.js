@@ -10,7 +10,6 @@ const index = async (req, res) => {
   const activeUser = await pool.query(
     `SELECT * from users WHERE id=${req.user.id}`
   );
-  console.log(activeUser);
   res.render("tickets/index", { tasks, users });
 };
 
@@ -54,7 +53,11 @@ const update = async (req, res) => {
 };
 
 const deleteTask = async (req, res) => {
-  console.log(req.body);
+  console.log(req.params.id, ' REQ PARAMS');
+  const taskToDelete = await pool.query(
+    `SELECT * FROM tasks where id=${req.params.id}`
+  );
+  console.log(taskToDelete);
 };
 const show = async (req, res) => {
   const task = await pool.query(
