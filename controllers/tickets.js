@@ -55,10 +55,12 @@ const update = async (req, res) => {
 const deleteTask = async (req, res) => {
   console.log(req.params.id, ' REQ PARAMS');
   const taskToDelete = await pool.query(
-    `SELECT * FROM tasks where id=${req.params.id}`
+    `DELETE FROM tasks where id=${req.params.id}`
   );
+  res.redirect('/tickets')
   console.log(taskToDelete);
 };
+
 const show = async (req, res) => {
   const task = await pool.query(
     `SELECT * FROM tasks WHERE id=${req.params.id}`
