@@ -11,4 +11,6 @@ router.get("/:id", ticketsCtrl.show);
 
 router.delete('/:id', ticketsCtrl.delete);
 
+router.put('/:id', ticketsCtrl.update);
+
 module.exports = router;

@@ -49,16 +49,16 @@ const create = async (req, res) => {
 };
 
 const update = async (req, res) => {
-  console.log(req.body);
+  const is_active = req.body.is_active ? true : false;
+  await pool.query(
+    `UPDATE tasks SET subject = ${req.body.subject}, description = ${req.body.description} WHERE id = ${req.params.id}`
+  );
+  res.redirect(`/tickets/${req.params.id}`);
 };
 
 const deleteTask = async (req, res) => {
-  console.log(req.params.id, ' REQ PARAMS');
-  const taskToDelete = await pool.query(
-    `DELETE FROM tasks where id=${req.params.id}`
-  );
-  res.redirect('/tickets')
-  console.log(taskToDelete);
+  await pool.query(`DELETE FROM tasks where id=${req.params.id}`);
+  res.redirect("/tickets");
 };
 
 const show = async (req, res) => {
