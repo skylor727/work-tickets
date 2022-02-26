@@ -49,11 +49,18 @@ const create = async (req, res) => {
 };
 
 const update = async (req, res) => {
-  const is_active = req.body.is_active ? true : false;
-  await pool.query(
-    `UPDATE tasks SET subject = ${req.body.subject}, description = ${req.body.description} WHERE id = ${req.params.id}`
-  );
-  res.redirect(`/tickets/${req.params.id}`);
+  const is_active = req.body.is_active === "true" ? true : false;
+  try {
+    await pool.query(
+      `UPDATE tasks SET subject='${req.body.subject}', description='${req.body.description}', is_active=${is_active} WHERE id=${
+        req.params.id
+      };`
+    );
+  } catch (err) {
+    console.log(err, " While Updating");
+  }
+  //
+  res.redirect(`/tickets`);
 };
 
 const deleteTask = async (req, res) => {
