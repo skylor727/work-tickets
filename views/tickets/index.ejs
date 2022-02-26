@@ -39,8 +39,8 @@
     </section>
     <h2>Active</h2>
     <div class="ticket-info-container">
-        <% if(!tasks.rows) { %>
-            <h3>No Tickets Exist </h3>
+        <% if(!tasks.rows.some((tsk) => tsk.is_active === true)) { %>
+            <h3>No Active Tickets Exist </h3>
             <%}%>
                 <% tasks.rows.forEach((task)=> { %>
                     <% if (task.is_active===true) { %>
@@ -52,7 +52,7 @@
                             </p>
                             <p>Assigned Employee: <%= users.rows[task.assigned_to].username %>
                             </p>
-                            <p>Submitted By: <%= users.rows[task.created_by] %>
+                            <p>Submitted By: <%= users.rows[task.created_by].username %>
                             </p>
                             <p>Ticket Status: Open
                             </p>
@@ -63,7 +63,7 @@
 
     </div>
     <h2>Closed</h2>
-    <% if(!tasks.rows) { %>
+    <% if(!tasks.rows.some((tsk) => tsk.is_active === false)) { %>
         <h3>No Closed Tickets</h3>
         <% } %>
             <% tasks.rows.forEach((task)=> { %>
@@ -76,7 +76,7 @@
                     </p>
                     <p>Assigned Employee: <%= users.rows[task.assigned_to].username %>
                     </p>
-                    <p>Submitted By: <%= users.rows[task.created_by] %>
+                    <p>Submitted By: <%= users.rows[task.created_by].username %>
                     </p>
                     <p>Ticket Status: Closed
                     </p>

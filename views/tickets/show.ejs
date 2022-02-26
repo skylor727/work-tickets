@@ -15,53 +15,55 @@
             })
         });
     </script>
-   
+
     <% task.rows.forEach((tsk)=> { %>
-            <p>Ticket ID: <%= tsk.id %>
-            </p>
-            <p>Ticket Subject: <%= tsk.subject %>
-            </p>
-            <p>Ticket Description: <%= tsk.description %>
-            </p>
-            <p>Assigned Employee: <%= users.rows[tsk.assigned_to].username %>
-            </p>
-            <p>Submitted By: <%= users.rows[tsk.created_by] %>
-            </p>
-            <p>Ticket Status: <%- tsk.is_active === false ? 'Closed' : 'Open' %>
-            </p>
-            <% if (user.id===tsk.created_by) { %>
-                <section class="ticket-modal">
-                    <div id="myModal" class="modal my-class-modal">
-                        <!-- Modal content -->
-                        <div class="modal-container">
-                            <div class="modal-content">
-                                <fieldset>
-                                    <legend>Submit a Ticket</legend>
-                                    <span class="close">&times;</span>
-                                    <form action="<%=tsk.id %>?_method=PUT" method="POST">
-                                        <label for="field-1"><span>Issue Subject</span><input type="text" value="<%= tsk.subject %>" name="subject"
-                                                id=""></label>
-                                        <br>
-                                        <label for="field-2"><span>Issue Description</span><textarea name="description" id=""
-                                                cols="30" rows="10"><%= tsk.description %></textarea></label>
-                                                <br>
-                                                <label for="">Mark as done</label><input type="checkbox" name="is_active" id="">
-                                </fieldset>
-                                <button type="submit">Update Ticket</button>
-                                </form>
-                            </div>
+        <p>Ticket ID: <%= tsk.id %>
+        </p>
+        <p>Ticket Subject: <%= tsk.subject %>
+        </p>
+        <p>Ticket Description: <%= tsk.description %>
+        </p>
+        <p>Assigned Employee: <%= users.rows[tsk.assigned_to].username %>
+        </p>
+        <p>Submitted By: <%=users.rows[tsk.created_by].username%>
+        </p>
+        <p>Ticket Status: <%- tsk.is_active===false ? 'Closed' : 'Open' %>
+        </p>
+        <% if (user.id===tsk.created_by) { %>
+            <section class="ticket-modal">
+                <div id="myModal" class="modal my-class-modal">
+                    <!-- Modal content -->
+                    <div class="modal-container">
+                        <div class="modal-content">
+                            <fieldset>
+                                <legend>Submit a Ticket</legend>
+                                <span class="close">&times;</span>
+                                <form action="<%=tsk.id %>?_method=PUT" method="POST">
+                                    <label for="field-1"><span>Issue Subject</span><input type="text"
+                                            value="<%= tsk.subject %>" name="subject" id=""></label>
+                                    <br>
+                                    <label for="field-2"><span>Issue Description</span><textarea name="description"
+                                            id="" cols="30" rows="10"><%= tsk.description %></textarea></label>
+                                    <br>
+                                    <% if (tsk.is_active) { %>
+                                        <label for="">Mark as done</label><input type="checkbox" name="is_active" id="">
+                                        <% } %>
+                            </fieldset>
+                            <button type="submit">Update Ticket</button>
+                            </form>
                         </div>
                     </div>
-                    <button id="myBtn" type="submit">Edit Ticket</button>
-                </section>
-                <form action="<%=tsk.id %>?_method=DELETE" method="POST">
+                </div>
+                <button id="myBtn" type="submit">Edit Ticket</button>
+            </section>
+            <form action="<%=tsk.id %>?_method=DELETE" method="POST">
                 <button type="submit">
                     Delete Ticket
                 </button>
             </form>
-        <hr>
-        <% } %>
-            <% }) %>
+            <hr>
+            <% } %>
+                <% }) %>
 
-                </div>
-                <%- include('../partials/footer') %>
+                    </div>
+                    <%- include('../partials/footer') %>

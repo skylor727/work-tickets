@@ -5,12 +5,16 @@ const getRandom = (min, max) => {
 };
 
 const index = async (req, res) => {
-  const tasks = await pool.query("SELECT * FROM tasks;");
-  const users = await pool.query("SELECT * FROM users");
-  const activeUser = await pool.query(
-    `SELECT * from users WHERE id=${req.user.id}`
-  );
-  res.render("tickets/index", { tasks, users });
+  try {
+    const tasks = await pool.query("SELECT * FROM tasks;");
+    const users = await pool.query("SELECT * FROM users");
+    const activeUser = await pool.query(
+      `SELECT * from users WHERE id=${req.user.id}`
+    );
+    res.render("tickets/index", { tasks, users });
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 const create = async (req, res) => {
@@ -52,9 +56,7 @@ const update = async (req, res) => {
   const is_active = req.body.is_active === "true" ? true : false;
   try {
     await pool.query(
-      `UPDATE tasks SET subject='${req.body.subject}', description='${req.body.description}', is_active=${is_active} WHERE id=${
-        req.params.id
-      };`
+      `UPDATE tasks SET subject='${req.body.subject}', description='${req.body.description}', is_active=${is_active} WHERE id=${req.params.id};`
     );
   } catch (err) {
     console.log(err, " While Updating");
@@ -64,16 +66,25 @@ const update = async (req, res) => {
 };
 
 const deleteTask = async (req, res) => {
-  await pool.query(`DELETE FROM tasks where id=${req.params.id}`);
+  try {
+    await pool.query(`DELETE FROM tasks where id=${req.params.id}`);
+  } catch (err) {
+    console.log(err, " while deleting");
+  }
   res.redirect("/tickets");
 };
 
 const show = async (req, res) => {
-  const task = await pool.query(
-    `SELECT * FROM tasks WHERE id=${req.params.id}`
-  );
-  const users = await pool.query(`SELECT * FROM users`);
-  res.render("tickets/show", { task, users });
+  try {
+    const task = await pool.query(
+      `SELECT * FROM tasks WHERE id=${req.params.id}`
+    );
+    const users = await pool.query(`SELECT * FROM users`);
+    res.render("tickets/show", { task, users });
+  } catch (err) {
+    console.log(err);
+    res.redirect("/");
+  }
 };
 
 module.exports = {
