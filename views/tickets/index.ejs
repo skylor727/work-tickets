@@ -1,69 +1,62 @@
 <%- include('../partials/header') %>
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const modal = document.getElementById("myModal");
-            const btn = document.getElementById("myBtn");
-            const span = document.getElementsByClassName("close")[0];
-
-            btn.addEventListener('click', () => modal.style.display = "block");
-            span.addEventListener('click', () => modal.style.display = "none");
-            window.addEventListener('click', (event) => {
-                if (event.target === modal) {
-                    modal.style.display = "none"
-                }
+        document.addEventListener('DOMContentLoaded', function () {
+            var elems = document.querySelectorAll('.modal');
+            var instances = M.Modal.init(elems);
+            var singleModalElem = document.querySelector('#modal1');
+            var instance = M.Modal.getInstance(singleModalElem);
+            const modalbtn = document.querySelector('#open')
+            modalbtn.addEventListener('click', () => {
+                instance.open();
+                // Do other stuff
             })
         });
     </script>
     <h1>Tickets</h1>
-    <section class="ticket-modal">
-        <div id="myModal" class="modal my-class-modal">
-            <!-- Modal content -->
-            <div class="modal-container">
-                <div class="modal-content">
-                    <fieldset>
-                        <legend>Submit a Ticket</legend>
-                        <span class="close">&times;</span>
-                        <form action="/tickets/create" method="POST">
-                            <label for="field-1"><span>Issue Subject</span><input type="text" name="subject"
-                                    id=""></label>
-                            <br>
-                            <label for="field-2"><span>Issue Description</span><textarea name="description" id=""
-                                    cols="30" rows="10"></textarea></label>
-                    </fieldset>
-                    <button type="submit">Add Ticket</button>
-                    </form>
-                </div>
+    <div id="modal1" class="modal">
+        <div class="modal-content">
+            <fieldset>
+                <legend>Submit a Ticket</legend>
+                <form action="/tickets/create" method="POST">
+                    <label for="field-1"><span>Issue Subject</span><input type="text" name="subject" id=""></label>
+                    <br>
+                    <label for="field-2"><span>Issue Description</span><textarea name="description" id="" cols="30"
+                            rows="10"></textarea></label>
+            </fieldset>
+            <div class="modal-footer">
+                <a href="#!" class="modal-close waves-effect waves-green btn-flat" type="submit">Add Ticket</a>
             </div>
+            </form>
         </div>
-        <button id="myBtn" type="submit">New Ticket</button>
-    </section>
+    </div>
+    <button id="open">Open a single modal</button>
     <h2>Active</h2>
     <div class="ticket-info-container">
-        <% if(!tasks.rows.some((tsk) => tsk.is_active === true)) { %>
+        <% if(!tasks.rows.some((tsk)=> tsk.is_active === true)) { %>
             <h3>No Active Tickets Exist </h3>
             <%}%>
                 <% tasks.rows.forEach((task)=> { %>
                     <% if (task.is_active===true) { %>
-                            <p>Ticket ID: <%= task.id %>
-                            </p>
-                            <p>Ticket Subject: <%= task.subject %>
-                            </p>
-                            <p>Ticket Description: <%= task.description %>
-                            </p>
-                            <p>Assigned Employee: <%= users.rows[task.assigned_to].username %>
-                            </p>
-                            <p>Submitted By: <%= users.rows[task.created_by].username %>
-                            </p>
-                            <p>Ticket Status: Open
-                            </p>
-                            <a href="/tickets/ <%= task.id %>">Details</a>
-                            <hr>
-                            <% } %>
-                                <% }) %>
+                        <p>Ticket ID: <%= task.id %>
+                        </p>
+                        <p>Ticket Subject: <%= task.subject %>
+                        </p>
+                        <p>Ticket Description: <%= task.description %>
+                        </p>
+                        <p>Assigned Employee: <%= users.rows[task.assigned_to].username %>
+                        </p>
+                        <p>Submitted By: <%= users.rows[task.created_by].username %>
+                        </p>
+                        <p>Ticket Status: Open
+                        </p>
+                        <a href="/tickets/ <%= task.id %>">Details</a>
+                        <hr>
+                        <% } %>
+                            <% }) %>
 
     </div>
     <h2>Closed</h2>
-    <% if(!tasks.rows.some((tsk) => tsk.is_active === false)) { %>
+    <% if(!tasks.rows.some((tsk)=> tsk.is_active === false)) { %>
         <h3>No Closed Tickets</h3>
         <% } %>
             <% tasks.rows.forEach((task)=> { %>
