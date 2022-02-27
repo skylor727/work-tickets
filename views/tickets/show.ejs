@@ -1,17 +1,15 @@
 <%- include('../partials/header') %>
     <h1>Ticket Details</h1>
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const modal = document.getElementById("myModal");
-            const btn = document.getElementById("myBtn");
-            const span = document.getElementsByClassName("close")[0];
-
-            btn.addEventListener('click', () => modal.style.display = "block");
-            span.addEventListener('click', () => modal.style.display = "none");
-            window.addEventListener('click', (event) => {
-                if (event.target === modal) {
-                    modal.style.display = "none"
-                }
+        document.addEventListener('DOMContentLoaded', function () {
+            var elems = document.querySelectorAll('.modal');
+            var instances = M.Modal.init(elems);
+            var singleModalElem = document.querySelector('#modal1');
+            var instance = M.Modal.getInstance(singleModalElem);
+            const modalbtn = document.querySelector('#open')
+            modalbtn.addEventListener('click', () => {
+                instance.open();
+                // Do other stuff
             })
         });
     </script>
@@ -30,40 +28,33 @@
         <p>Ticket Status: <%- tsk.is_active===false ? 'Closed' : 'Open' %>
         </p>
         <% if (user.id===tsk.created_by) { %>
-            <section class="ticket-modal">
-                <div id="myModal" class="modal my-class-modal">
-                    <!-- Modal content -->
-                    <div class="modal-container">
-                        <div class="modal-content">
-                            <fieldset>
-                                <legend>Submit a Ticket</legend>
-                                <span class="close">&times;</span>
-                                <form action="<%=tsk.id %>?_method=PUT" method="POST">
-                                    <label for="field-1"><span>Issue Subject</span><input type="text"
-                                            value="<%= tsk.subject %>" name="subject" id=""></label>
-                                    <br>
-                                    <label for="field-2"><span>Issue Description</span><textarea name="description"
-                                            id="" cols="30" rows="10"><%= tsk.description %></textarea></label>
-                                    <br>
-                                    <% if (tsk.is_active) { %>
-                                        <label for="">Mark as done</label><input type="checkbox" name="is_active" id="">
-                                        <% } %>
-                            </fieldset>
-                            <button type="submit">Update Ticket</button>
-                            </form>
-                        </div>
+            <div id="modal1" class="modal">
+                <div class="modal-content">
+                    <fieldset>
+                        <legend>Submit a Ticket</legend>
+                        <form action="<%=tsk.id %>?_method=PUT" method="POST">
+                            <label for="field-1"><span>Issue Subject</span><input type="text" value="<%= tsk.subject %>"
+                                    name="subject" id=""></label>
+                            <br>
+                            <label for="field-2"><span>Issue Description</span><textarea name="description" id=""
+                                    cols="30" rows="10"><%= tsk.description %> </textarea></label>
+                            <% if (tsk.is_active) { %>
+                                <label for="">Mark as done</label><input type="checkbox" name="is_active" id="">
+                                <% } %>
+                    </fieldset>
+                    <div class="modal-footer">
+                        <button class="btn waves-effect waves-green btn-flat" type="submit">Update Ticket</button>
                     </div>
+                    </form>
                 </div>
-                <button id="myBtn" type="submit">Edit Ticket</button>
-            </section>
+            </div>
+            <button class="waves-effect waves-green btn" id="open">Edit Ticket</button>
             <form action="<%=tsk.id %>?_method=DELETE" method="POST">
-                <button type="submit">
+                <button class="waves-effect waves-green btn" type="submit">
                     Delete Ticket
                 </button>
             </form>
-            <hr>
             <% } %>
                 <% }) %>
-
                     </div>
                     <%- include('../partials/footer') %>

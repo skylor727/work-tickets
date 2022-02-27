@@ -62,7 +62,7 @@ const update = async (req, res) => {
     console.log(err, " While Updating");
   }
   //
-  res.redirect(`/tickets`);
+  res.redirect(`/tickets/${req.params.id}`);
 };
 
 const deleteTask = async (req, res) => {

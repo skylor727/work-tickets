@@ -12,6 +12,7 @@
             })
         });
     </script>
+    <button class="waves-effect waves-green btn" id="open">New Ticket Form</button>
     <h1>Tickets</h1>
     <div id="modal1" class="modal">
         <div class="modal-content">
@@ -24,12 +25,12 @@
                             rows="10"></textarea></label>
             </fieldset>
             <div class="modal-footer">
-                <a href="#!" class="modal-close waves-effect waves-green btn-flat" type="submit">Add Ticket</a>
+                <button class="btn waves-effect waves-green btn-flat" type="submit">Add Ticket</button>
             </div>
             </form>
         </div>
     </div>
-    <button id="open">Open a single modal</button>
+
     <h2>Active</h2>
     <div class="ticket-info-container">
         <% if(!tasks.rows.some((tsk)=> tsk.is_active === true)) { %>
@@ -37,20 +38,23 @@
             <%}%>
                 <% tasks.rows.forEach((task)=> { %>
                     <% if (task.is_active===true) { %>
-                        <p>Ticket ID: <%= task.id %>
-                        </p>
-                        <p>Ticket Subject: <%= task.subject %>
-                        </p>
-                        <p>Ticket Description: <%= task.description %>
-                        </p>
-                        <p>Assigned Employee: <%= users.rows[task.assigned_to].username %>
-                        </p>
-                        <p>Submitted By: <%= users.rows[task.created_by].username %>
-                        </p>
-                        <p>Ticket Status: Open
-                        </p>
-                        <a href="/tickets/ <%= task.id %>">Details</a>
-                        <hr>
+                        <div class="card">
+                            <div class="card-content">
+                                <p>Ticket ID: <%= task.id %>
+                                </p>
+                                <p>Ticket Subject: <%= task.subject %>
+                                </p>
+                                <p>Ticket Description: <%= task.description %>
+                                </p>
+                                <p>Assigned Employee: <%= users.rows[task.assigned_to].username %>
+                                </p>
+                                <p>Submitted By: <%= users.rows[task.created_by].username %>
+                                </p>
+                                <p>Ticket Status: Open
+                                </p>
+                                <a class="btn" href="/tickets/ <%= task.id %>">Details</a>
+                            </div>
+                        </div>
                         <% } %>
                             <% }) %>
 
@@ -61,19 +65,23 @@
         <% } %>
             <% tasks.rows.forEach((task)=> { %>
                 <% if(task.is_active===false) { %>
-                    <p>Ticket ID: <%= task.id %>
-                    </p>
-                    <p>Ticket Subject: <%= task.subject %>
-                    </p>
-                    <p>Ticket Description: <%= task.description %>
-                    </p>
-                    <p>Assigned Employee: <%= users.rows[task.assigned_to].username %>
-                    </p>
-                    <p>Submitted By: <%= users.rows[task.created_by].username %>
-                    </p>
-                    <p>Ticket Status: Closed
-                    </p>
-                    <a href="/tickets/ <%= task.id %>">Details</a>
+                    <div class="card">
+                        <div class="card-content">
+                            <p>Ticket ID: <%= task.id %>
+                            </p>
+                            <p>Ticket Subject: <%= task.subject %>
+                            </p>
+                            <p>Ticket Description: <%= task.description %>
+                            </p>
+                            <p>Assigned Employee: <%= users.rows[task.assigned_to].username %>
+                            </p>
+                            <p>Submitted By: <%= users.rows[task.created_by].username %>
+                            </p>
+                            <p>Ticket Status: Closed
+                            </p>
+                            <a class="btn" href="/tickets/ <%= task.id %>">Details</a>
+                        </div>
+                    </div>
                     <hr>
                     <% } %>
                         <% }) %>
