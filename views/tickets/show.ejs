@@ -34,12 +34,15 @@
                         <legend>Submit a Ticket</legend>
                         <form action="<%=tsk.id %>?_method=PUT" method="POST">
                             <label for="field-1"><span>Issue Subject</span><input type="text" value="<%= tsk.subject %>"
-                                    name="subject" id=""></label>
+                                    name="subject"></label>
                             <br>
-                            <label for="field-2"><span>Issue Description</span><textarea name="description" id=""
-                                    cols="30" rows="10"><%= tsk.description %> </textarea></label>
+                            <label for="field-2"><span>Issue Description</span><textarea name="description" cols="30"
+                                    rows="10"><%= tsk.description %> </textarea></label>
                             <% if (tsk.is_active) { %>
-                                <label for="">Mark as done</label><input type="checkbox" name="is_active" id="">
+                                <label>
+                                    <input name='is_active' type="checkbox" />
+                                    <span>Issue resolved</span>
+                                </label>
                                 <% } %>
                     </fieldset>
                     <div class="modal-footer">
@@ -48,13 +51,15 @@
                     </form>
                 </div>
             </div>
-            <button class="waves-effect waves-green btn" id="open">Edit Ticket</button>
-            <form action="<%=tsk.id %>?_method=DELETE" method="POST">
-                <button class="waves-effect waves-green btn" type="submit">
-                    Delete Ticket
-                </button>
-            </form>
-            <% } %>
-                <% }) %>
-                    </div>
-                    <%- include('../partials/footer') %>
+            <% if(tsk.is_active) { %>
+                <button class="waves-effect waves-green btn" id="open">Edit Ticket</button>
+                <% } %>
+                    <form action="<%=tsk.id %>?_method=DELETE" method="POST">
+                        <button class="waves-effect waves-green btn" type="submit">
+                            Delete Ticket
+                        </button>
+                    </form>
+                    <% } %>
+                        <% }) %>
+                            </div>
+                            <%- include('../partials/footer') %>

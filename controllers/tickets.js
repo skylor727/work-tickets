@@ -6,7 +6,7 @@ const getRandom = (min, max) => {
 
 const index = async (req, res) => {
   try {
-    const tasks = await pool.query("SELECT * FROM tasks;");
+    const tasks = await pool.query("SELECT * FROM tasks");
     const users = await pool.query("SELECT * FROM users");
     const activeUser = await pool.query(
       `SELECT * from users WHERE id=${req.user.id}`
@@ -23,7 +23,7 @@ const create = async (req, res) => {
   //Get a random number for the length of users whose role = employee
   try {
     let maxNum = await pool.query(
-      "SELECT COUNT(*) FROM users WHERE user_role='employee';"
+      "SELECT COUNT(*) FROM users WHERE user_role='employee'"
     );
     randomNum = Math.floor(
       getRandom(
@@ -37,7 +37,7 @@ const create = async (req, res) => {
 
   // Query to add task
   let insertQuery = `INSERT INTO tasks(subject, description, assigned_to, created_by)
-  VALUES('${ticket.subject}', '${ticket.description}', ${randomNum}, ${req.user.id});`;
+  VALUES('${ticket.subject}', '${ticket.description}', ${randomNum}, ${req.user.id})`;
 
   const insertTask = async (query) => {
     try {
@@ -53,10 +53,12 @@ const create = async (req, res) => {
 };
 
 const update = async (req, res) => {
-  const is_active = req.body.is_active === "true" ? true : false;
+  const is_active = req.body.is_active ? false : true;
+  console.log(is_active, " is_active var");
+  console.log(req.body.is_active, " is_active req.body");
   try {
     await pool.query(
-      `UPDATE tasks SET subject='${req.body.subject}', description='${req.body.description}', is_active=${is_active} WHERE id=${req.params.id};`
+      `UPDATE tasks SET subject='${req.body.subject}', description='${req.body.description}', is_active=${is_active} WHERE id=${req.params.id}`
     );
   } catch (err) {
     console.log(err, " While Updating");
