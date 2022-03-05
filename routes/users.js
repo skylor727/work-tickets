@@ -5,4 +5,6 @@ const usersCtrl = require("../controllers/users");
 
 router.get("/employee", authRole("employee"), usersCtrl.index);
 
+router.get("/:id", authRole("employee"), usersCtrl.show);
+
 module.exports = router;

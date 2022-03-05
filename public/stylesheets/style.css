@@ -14,3 +14,13 @@ footer.page-footer {
   text-align: right;
 }
 
+.user-card {
+  display: grid;
+  grid-template-columns: 100px 125px;
+  grid-template-rows: 1fr;
+}
+
+
+.user-info {
+  word-wrap: nowrap;
+}
