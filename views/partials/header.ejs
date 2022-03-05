@@ -25,15 +25,13 @@
           </ul>
           <ul class="right">
             <% if (user) { %>
-              <% if(user.role==='employee' ) { %>
-                <li><a href="">Employee Portal</a></li>
+              <li><a href="/users/employee">Employee Portal</a></li>
+              <li><a href="/tickets">Tickets</a></li>
+              <li> <a href="/logout">Logout</a></li>
+              <% } else { %>
+                <li><a href="/">Home</a></li>
+                <li><a href="/auth/google">Login</a></li>
                 <% } %>
-                  <li><a href="/tickets">Tickets</a></li>
-                  <li> <a href="/logout">Logout</a></li>
-                  <% } else { %>
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/auth/google">Login</a></li>
-                    <% } %>
           </ul>
         </div>
       </nav>
