@@ -9,6 +9,7 @@ const getUser = async (userId) => {
     console.log(err, " while fetching user");
   }
 };
+
 module.exports = authRole = (role) => {
   return async (req, res, next) => {
     if ((await getUser(req.user.id)) !== role) {

@@ -1,3 +1,19 @@
 <%- include('../partials/header') %>
-<h1>Employee page</h1>
-    <%- include('../partials/footer') %>
+    <h1>Employee page</h1>
+
+    <h4 class="center-align">Registered Users</h4>
+
+    <% users.rows.forEach((user)=> { %>
+        <div class="card center-align">
+            <div class="card-content">
+                <p>User ID: <%= user.id %>
+                </p>
+                <p>User Name: <%= user.username %>
+                </p>
+                <p>User Role: <%= user.user_role %>
+                </p>
+                <a class="btn" href="/users/ <%= user.id %>">Details</a>
+            </div>
+        </div>
+        <% }) %>
+            <%- include('../partials/footer') %>
