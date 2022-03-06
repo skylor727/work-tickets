@@ -2,21 +2,19 @@
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const elems = document.querySelectorAll('.modal');
-            const instances = M.Modal.init(elems);
-            const singleModalElem = document.querySelector('#modal1');
-            const instance = M.Modal.getInstance(singleModalElem);
+            const instances = M.Modal.init(elems, options = {
+                dismissible: false
+            });
             const modalbtn = document.querySelectorAll('#open')
-            modalbtn.forEach((modal) => modal.addEventListener('click', () => {
+            modalbtn.forEach((modal) => modal.addEventListener('click', (evt) => {
+                const idx = parseInt(evt.target.classList[3]) - 1;
+                const modalElem = elems[idx];
+                let instance = M.Modal.getInstance(modalElem);
                 instance.open();
-            }))
-            const cardDivs = document.querySelectorAll('.card');
-            cardDivs.forEach((card) => card.addEventListener('click', (evt) => {
-                const classes = evt.path[2].className;
-                const id = parseInt(classes.slice(classes.length - 1));
+                document.querySelectorAll('.close-button').forEach((btn) => btn.addEventListener('click', () => instance.close()))
             }))
         });
     </script>
-
     <h1>Employee page</h1>
     <h4 class="center-align">Registered Users</h4>
     <% users.rows.forEach((user)=> { %>
@@ -28,28 +26,33 @@
                 </p>
                 <p>User Role: <%= user.user_role %>
                 </p>
-                <button class="waves-effect waves-green btn" id="open">User Details</button>
+                <button class="waves-effect waves-green btn <%=user.id%>" id="open">User Details</button>
             </div>
         </div>
         <% }) %>
-            <div id="modal1" class="modal">
-                <div class="modal-content">
-                    <h4 class="center-align">User Detail Page</h4>
-                    <div class="card center-align">
-                        <div class="card-content user-card">
-                            <div>
-                                <img class="responsive-img circle" src="" alt="">
+            <% users.rows.forEach((user)=> { %>
+                <div id="modal<%=user.id%>" class="modal">
+                    <button class="close-button"> <span class="close">X</span> </button>
+                    <div class="modal-content">
+                        <h4 class="center-align">User Detail Page</h4>
+                        <div class="card center-align">
+                            <div class="card-content user-card">
+                                <div>
+                                    <img class="responsive-img circle" src="<%=user.img%>" alt="">
+                                </div>
+                                <div class="user-info">
+
+                                    <span>Name <%=user.username %>
+                                    </span>
+                                    <span>ID:<%=user.id%>
+                                    </span>
+                                    <span>Role: <%= user.user_role%>
+                                    </span>
+                                </div>
+                                </h4>
                             </div>
-                            <div class="user-info">
-                                <span>
-                                    Name:<%= user.id %>
-                                </span>
-                                <span>ID:
-                                </span>
-                                <span>Role:
-                                </span>
-                            </div>
-                            </h4>
                         </div>
                     </div>
+                </div>
+                <% }) %>
                     <%- include('../partials/footer') %>
