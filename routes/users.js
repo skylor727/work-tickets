@@ -3,8 +3,8 @@ var router = express.Router();
 const authRole = require("../config/basicAuth");
 const usersCtrl = require("../controllers/users");
 
-router.get("/employee", authRole("employee"), usersCtrl.index);
+router.get("/employee", authRole("Employee"), usersCtrl.index);
 
-router.get("/:id", authRole("employee"), usersCtrl.show);
+router.get("/:id", authRole("Employee"), usersCtrl.show);
 
 module.exports = router;

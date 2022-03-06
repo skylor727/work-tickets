@@ -1,10 +1,26 @@
 <%- include('../partials/header') %>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const elems = document.querySelectorAll('.modal');
+            const instances = M.Modal.init(elems);
+            const singleModalElem = document.querySelector('#modal1');
+            const instance = M.Modal.getInstance(singleModalElem);
+            const modalbtn = document.querySelectorAll('#open')
+            modalbtn.forEach((modal) => modal.addEventListener('click', () => {
+                instance.open();
+            }))
+            const cardDivs = document.querySelectorAll('.card');
+            cardDivs.forEach((card) => card.addEventListener('click', (evt) => {
+                const classes = evt.path[2].className;
+                const id = parseInt(classes.slice(classes.length - 1));
+            }))
+        });
+    </script>
+
     <h1>Employee page</h1>
-
     <h4 class="center-align">Registered Users</h4>
-
     <% users.rows.forEach((user)=> { %>
-        <div class="card center-align">
+        <div class="card center-align <%=user.id%>">
             <div class="card-content">
                 <p>User ID: <%= user.id %>
                 </p>
@@ -12,8 +28,28 @@
                 </p>
                 <p>User Role: <%= user.user_role %>
                 </p>
-                <a class="btn" href="/users/ <%= user.id %>">Details</a>
+                <button class="waves-effect waves-green btn" id="open">User Details</button>
             </div>
         </div>
         <% }) %>
-            <%- include('../partials/footer') %>
+            <div id="modal1" class="modal">
+                <div class="modal-content">
+                    <h4 class="center-align">User Detail Page</h4>
+                    <div class="card center-align">
+                        <div class="card-content user-card">
+                            <div>
+                                <img class="responsive-img circle" src="" alt="">
+                            </div>
+                            <div class="user-info">
+                                <span>
+                                    Name:<%= user.id %>
+                                </span>
+                                <span>ID:
+                                </span>
+                                <span>Role:
+                                </span>
+                            </div>
+                            </h4>
+                        </div>
+                    </div>
+                    <%- include('../partials/footer') %>

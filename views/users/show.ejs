@@ -1,19 +1,6 @@
 <%- include('../partials/header') %>
+    
     <% user=user.rows[0] %>
-        <h4 class="center-align">User Detail Page</h4>
-        <div class="card center-align">
-            <div class="card-content user-card">
-                <img class="responsive-img circle" src=<%=user.img %> alt="">
-                <div class="user-info">
-                    <span>
-                        Name: <%= user.username %>
-                    </span>
-                    <span>ID: <%= user.id %>
-                    </span>
-                    <span>Role: <%= user.user_role %>
-                    </span>
-                </div>
-                </h4>
-
+      
 
                 <%- include('../partials/footer') %>
