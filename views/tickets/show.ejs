@@ -20,9 +20,9 @@
         </p>
         <p>Ticket Description: <%= tsk.description %>
         </p>
-        <p>Assigned Employee: <%= users.rows[tsk.assigned_to].username %>
+        <p>Assigned Employee: <%= users.rows.find((u)=> u.id === tsk.assigned_to).username  %>
         </p>
-        <p>Submitted By: <%=users.rows[tsk.created_by].username%>
+        <p>Submitted By: <%=users.rows.find((u)=> u.id === tsk.created_by).username %>
         </p>
         <p>Ticket Status: <%- tsk.is_active===false ? 'Closed' : 'Open' %>
         </p>

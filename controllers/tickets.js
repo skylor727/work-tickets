@@ -8,9 +8,7 @@ const index = async (req, res) => {
   try {
     const tasks = await pool.query("SELECT * FROM tasks");
     const users = await pool.query("SELECT * FROM users");
-    const activeUser = await pool.query(
-      `SELECT * from users WHERE id=${req.user.id}`
-    );
+  
     res.render("tickets/index", { tasks, users });
   } catch (err) {
     console.log(err);
@@ -23,7 +21,7 @@ const create = async (req, res) => {
   //Get a random number for the length of users whose role = employee
   try {
     let maxNum = await pool.query(
-      "SELECT COUNT(*) FROM users WHERE user_role='employee'"
+      "SELECT COUNT(*) FROM users WHERE user_role='Employee'"
     );
     randomNum = Math.floor(
       getRandom(

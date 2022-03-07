@@ -45,9 +45,9 @@
                                 </p>
                                 <p>Ticket Description: <%= task.description %>
                                 </p>
-                                <p>Assigned Employee: <%= users.rows[task.assigned_to].username %>
+                                <p>Assigned Employee: <%= users.rows.find((u)=> u.id === task.assigned_to).username %>
                                 </p>
-                                <p>Submitted By: <%= users.rows[task.created_by].username %>
+                                <p>Submitted By: <%=users.rows.find((u)=> u.id === task.created_by).username%>
                                 </p>
                                 <p>Ticket Status: Open
                                 </p>
@@ -72,9 +72,9 @@
                             </p>
                             <p>Ticket Description: <%= task.description %>
                             </p>
-                            <p>Assigned Employee: <%= users.rows[task.assigned_to].username %>
+                            <p>Assigned Employee: <%= users.rows.find((u)=> u.id === task.assigned_to).username  %>
                             </p>
-                            <p>Submitted By: <%= users.rows[task.created_by].username %>
+                            <p>Submitted By: <%= users.rows.find((u)=> u.id === task.created_by).username  %>
                             </p>
                             <p>Ticket Status: Closed
                             </p>
