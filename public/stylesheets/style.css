@@ -28,13 +28,14 @@ footer.page-footer {
 }
 
 .close {
-  margin-right: 20px;
+  
   font-size: 20px;
-  float: right;
+  
 }
 
 .close-button {
   background: none;
   border: none;
   cursor: pointer;
+  float:right;
 }

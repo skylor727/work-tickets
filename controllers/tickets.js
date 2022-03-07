@@ -8,7 +8,6 @@ const index = async (req, res) => {
   try {
     const tasks = await pool.query("SELECT * FROM tasks");
     const users = await pool.query("SELECT * FROM users");
-
     res.render("tickets/index", { tasks, users });
   } catch (err) {
     console.log(err);
