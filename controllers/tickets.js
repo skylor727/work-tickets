@@ -75,7 +75,10 @@ const show = async (req, res) => {
       `SELECT * FROM tasks WHERE id=${req.params.id}`
     );
     const users = await pool.query(`SELECT * FROM users`);
-    res.render("tickets/show", { task, users });
+    const activeUser = await pool.query(
+      `SELECT * FROM users WHERE id=${req.user.id}`
+    );
+    res.render("tickets/show", { task, users, activeUser: activeUser.rows[0] });
   } catch (err) {
     console.log(err);
     res.redirect("/");

@@ -20,13 +20,13 @@
         </p>
         <p>Ticket Description: <%= tsk.description %>
         </p>
-        <p>Assigned Employee: <%= users.rows.find((u)=> u.id === tsk.assigned_to).username  %>
+        <p>Assigned Employee: <%= users.rows.find((u)=> u.id === tsk.assigned_to).username %>
         </p>
         <p>Submitted By: <%=users.rows.find((u)=> u.id === tsk.created_by).username %>
         </p>
         <p>Ticket Status: <%- tsk.is_active===false ? 'Closed' : 'Open' %>
         </p>
-        <% if (user.id===tsk.created_by) { %>
+        <% if (user.id===tsk.created_by || activeUser.user_role==='Employee' ) { %>
             <div id="modal1" class="modal">
                 <div class="modal-content">
                     <fieldset>
@@ -50,7 +50,7 @@
                     </form>
                 </div>
             </div>
-            <% if(tsk.is_active) { %>
+            <% if(tsk.is_active || activeUser.user_role==='Employee' && tsk.is_active) { %>
                 <button class="waves-effect waves-green btn" id="open">Edit Ticket</button>
                 <% } %>
                     <form action="<%=tsk.id %>?_method=DELETE" method="POST">

@@ -1,0 +1,68 @@
+<%- include('../partials/header') %>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var elems = document.querySelectorAll('.modal');
+            var instances = M.Modal.init(elems);
+            var singleModalElem = document.querySelector('#modal1');
+            var instance = M.Modal.getInstance(singleModalElem);
+            const modalbtn = document.querySelector('#open')
+            modalbtn.addEventListener('click', () => {
+                instance.open();
+            })
+        });
+    </script>
+    <h2>Open Tickets</h2>
+    <div class="ticket-info-container">
+        <% if(!userTickets.rows.some((tsk)=> tsk.is_active === true)) { %>
+            <h3>No Open Tickets Exist </h3>
+            <%}%>
+                <% userTickets.rows.forEach((task)=> { %>
+                    <% if (task.is_active===true) { %>
+                        <div class="card">
+                            <div class="card-content">
+                                <p>Ticket ID: <%= task.id %>
+                                </p>
+                                <p>Ticket Subject: <%= task.subject %>
+                                </p>
+                                <p>Ticket Description: <%= task.description %>
+                                </p>
+                                <p>Assigned Employee: <%= users.rows.find((u)=> u.id === task.assigned_to).username %>
+                                </p>
+                                <p>Submitted By: <%=users.rows.find((u)=> u.id === task.created_by).username%>
+                                </p>
+                                <p>Ticket Status: Open
+                                </p>
+                                <a class="btn" href="/tickets/ <%= task.id %>">Details</a>
+                            </div>
+                        </div>
+                        <% } %>
+                            <% }) %>
+
+    </div>
+    <h2>Closed</h2>
+    <% if(!userTickets.rows.some((tsk)=> tsk.is_active === false)) { %>
+        <h3>No Closed Tickets</h3>
+        <% } %>
+            <% userTickets.rows.forEach((task)=> { %>
+                <% if(task.is_active===false) { %>
+                    <div class="card">
+                        <div class="card-content">
+                            <p>Ticket ID: <%= task.id %>
+                            </p>
+                            <p>Ticket Subject: <%= task.subject %>
+                            </p>
+                            <p>Ticket Description: <%= task.description %>
+                            </p>
+                            <p>Assigned Employee: <%= users.rows.find((u)=> u.id === task.assigned_to).username %>
+                            </p>
+                            <p>Submitted By: <%= users.rows.find((u)=> u.id === task.created_by).username %>
+                            </p>
+                            <p>Ticket Status: Closed
+                            </p>
+                            <a class="btn" href="/tickets/ <%= task.id %>">Details</a>
+                        </div>
+                    </div>
+                    <% } %>
+                        <% }) %>
+
+                            <%- include('../partials/footer') %>

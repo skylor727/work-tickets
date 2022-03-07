@@ -39,3 +39,11 @@ footer.page-footer {
   cursor: pointer;
   float:right;
 }
+
+
+.home {
+  margin-top: 100px;
+  display: flex;
+  justify-content: space-evenly;
+  
+}
