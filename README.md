@@ -1,6 +1,12 @@
 # **Welcome to Work Tickets**
 A full stack CRUD application for submitting issue tickets running off of a postgreSQL database.
 ## Screenshots
+![HomePage](https://i.imgur.com/J5hsbV4.png)
+![Tickets index](https://i.imgur.com/no1shu9.png)
+![Submit Ticket Form](https://i.imgur.com/mNK0ZH0.png)
+![Edit Ticket](https://i.imgur.com/4ypqxAb.png)
+![User Detail](https://i.imgur.com/zFt76NL.png)
+![Assigned Tickets for and employee](https://i.imgur.com/Jy4N96U.png)
 
 ## Technologies Used
    - HTML 
