@@ -13,7 +13,7 @@ ssm.getParameters(params, (err, data) => {
   if (err) {
     console.log(err);
   } else {
-    SECRETS = data.Parameters.Value;
+    SECRETS = data.Parameters;
   }
 });
 
