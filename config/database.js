@@ -1,7 +1,7 @@
 var pg = require("pg");
-const getDBUrl = require("../aws-ssm").getDBUrl;
+const getDBUrl = require("../aws-ssm").getParameter;
 async function main() {
-  const DATABASE_URL = await getDBUrl();
+  const DATABASE_URL = await getDBUrl("DATABASE_URL");
   var conString = `${DATABASE_URL}`;
 
   var client = new pg.Client({

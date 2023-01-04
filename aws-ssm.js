@@ -1,9 +1,9 @@
 const AWS = require("aws-sdk");
 AWS.config.update({ region: "us-east-2" });
 require("dotenv").config();
-// const key = process.env.ACCESS_KEY;
-// const secret_key = process.env.SECRET_KEY;
-// AWS.config.credentials = new AWS.Credentials(key, secret_key);
+const key = process.env.ACCESS_KEY;
+const secret_key = process.env.SECRET_KEY;
+AWS.config.credentials = new AWS.Credentials(key, secret_key);
 const ssm = new AWS.SSM();
 
 const getParameters = async () => {
@@ -16,15 +16,15 @@ const getParameters = async () => {
   return data.Parameters;
 };
 
-const getDBUrl = async () => {
+const getParameter = async (parameterName) => {
   const params = {
-    Name: "DATABASE_URL",
+    Name: parameterName,
     WithDecryption: true,
   };
   const data = await ssm.getParameter(params).promise();
   return data.Parameter.Value;
 };
-module.exports = { getParameters, getDBUrl };
+module.exports = { getParameters, getParameter };
 
 //const SECRETS = await getParameters();
 //const GOOGLE_CLIENT_ID = SECRETS[0].Value
