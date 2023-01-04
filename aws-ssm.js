@@ -6,14 +6,14 @@ const secret_key = process.env.SECRET_KEY;
 AWS.config.credentials = new AWS.Credentials(key, secret_key);
 const ssm = new AWS.SSM();
 
-const getParameters = async () => {
+const getParameters = () => {
   const params = {
     Names: ["GOOGLE_CLIENT_ID", "GOOGLE_SECRET", "GOOGLE_CALLBACK"],
     WithDecryption: true,
   };
 
   try {
-    const data = await ssm.getParameters(params).promise();
+    const data = ssm.getParameters(params);
     return data.Parameters;
   } catch (err) {
     console.log(err);
