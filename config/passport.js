@@ -3,7 +3,7 @@ const GoogleStrategy = require("passport-google-oauth").OAuth2Strategy;
 const pool = require("../db");
 const getSecrets = require("../aws-ssm");
 
-const SECRETS = await getParameters();
+const SECRETS = getParameters();
 const GOOGLE_CLIENT_ID = SECRETS[0].Value;
 const GOOGLE_SECRET = SECRETS[1].Value;
 const GOOGLE_CALLBACK = SECRETS[2].Value;
