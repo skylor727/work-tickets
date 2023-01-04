@@ -1,10 +1,15 @@
 const { Pool } = require("pg");
+const getDBUrl = require("./aws-ssm").getParameter;
 
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl: {
-    rejectUnauthorized: false,
-  },
-});
+async function main() {
+  const DATABASE_URL = await getDBUrl("DATABASE_URL");
+  const pool = new Pool({
+    connectionString: DATABASE_URL,
+    ssl: {
+      rejectUnauthorized: false,
+    },
+  });
 
-module.exports = pool;
+  module.exports = pool;
+}
+main();
