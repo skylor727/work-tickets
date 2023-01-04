@@ -1,13 +1,13 @@
 const passport = require("passport");
 const GoogleStrategy = require("passport-google-oauth").OAuth2Strategy;
 const pool = require("../db");
-const getSecrets = require("../aws-ssm");
+const getSecrets = require("../aws-ssm").getParameters;
 
 async function main() {
   const SECRETS = await getSecrets();
-  const GOOGLE_CLIENT_ID = SECRETS[0].Value;
-  const GOOGLE_SECRET = SECRETS[1].Value;
-  const GOOGLE_CALLBACK = SECRETS[2].Value;
+  const GOOGLE_CLIENT_ID = SECRETS[1].Value;
+  const GOOGLE_SECRET = SECRETS[2].Value;
+  const GOOGLE_CALLBACK = SECRETS[0].Value;
   passport.use(
     new GoogleStrategy(
       {
