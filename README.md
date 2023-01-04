@@ -18,7 +18,7 @@ A full stack CRUD application for submitting issue tickets running off of a post
    - PostgreSQL
    - Docker
 ## Getting Started
-- [Access here]([https://work-tickets.herokuapp.com/](http://ec2-18-223-30-104.us-east-2.compute.amazonaws.com:3000/))
+- [Access here](http://ec2-18-223-30-104.us-east-2.compute.amazonaws.com:3000/)
 - Start by logging in via Google to access additional screens
 - Once logged in you will be able to access the pages to 
    - Submit a ticket 
