@@ -5,6 +5,7 @@ const getSecrets = require("../aws-ssm").getParameters;
 
 async function main() {
   const SECRETS = await getSecrets();
+  console.log(SECRETS);
   const GOOGLE_CLIENT_ID = SECRETS[1].Value;
   const GOOGLE_SECRET = SECRETS[2].Value;
   const GOOGLE_CALLBACK = SECRETS[0].Value;
