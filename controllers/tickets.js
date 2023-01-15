@@ -39,7 +39,7 @@ const create = async (req, res) => {
     } catch (err) {
       console.log(err);
     }
-    res.redirect("/tickets");
+    res.redirect("/work-tickets/tickets");
     pool.end;
   };
   insertTask(insertQuery);
@@ -57,7 +57,7 @@ const update = async (req, res) => {
     console.log(err, " While Updating");
   }
   //
-  res.redirect(`/tickets/${req.params.id}`);
+  res.redirect(`/work-tickets/tickets/${req.params.id}`);
 };
 
 const deleteTask = async (req, res) => {
@@ -66,7 +66,7 @@ const deleteTask = async (req, res) => {
   } catch (err) {
     console.log(err, " while deleting");
   }
-  res.redirect("/tickets");
+  res.redirect("/work-tickets/tickets");
 };
 
 const show = async (req, res) => {
@@ -81,7 +81,7 @@ const show = async (req, res) => {
     res.render("tickets/show", { task, users, activeUser: activeUser.rows[0] });
   } catch (err) {
     console.log(err);
-    res.redirect("/");
+    res.redirect("/work-tickets");
   }
 };
 

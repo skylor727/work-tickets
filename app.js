@@ -44,9 +44,9 @@ app.use((req, res, next) => {
 });
 const isLoggedIn = require("./config/auth");
 
-app.use("/", indexRouter);
-app.use("/users", isLoggedIn, usersRouter);
-app.use("/tickets", isLoggedIn, ticketsRouter);
+app.use("/work-tickets", indexRouter);
+app.use("/work-tickets/users", isLoggedIn, usersRouter);
+app.use("/work-tickets/tickets", isLoggedIn, ticketsRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

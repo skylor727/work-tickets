@@ -14,14 +14,14 @@ router.get(
 router.get(
   "/oauth2callback",
   passport.authenticate("google", {
-    successRedirect: "/",
-    failureRedirect: "/",
+    successRedirect: "/work-tickets",
+    failureRedirect: "/work-tickets",
   })
 );
 
 router.get("/logout", (req, res) => {
   req.logout();
-  res.redirect("/");
+  res.redirect("/work-tickets");
 });
 
 router.get("/", (req, res) => {
