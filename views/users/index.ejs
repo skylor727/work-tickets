@@ -16,7 +16,7 @@
         });
     </script>
     <h1>Employee page</h1>
-    <a class="btn" href="/users/employee/<%= activeUser.id %>">Your Tickets</a>
+    <a class="btn" href="/work-tickets/users/employee/<%= activeUser.id %>">Your Tickets</a>
     <h4 class="center-align">Registered Users</h4>
     <% users.rows.forEach((user)=> { %>
         <div class="card center-align <%=user.id%>">
