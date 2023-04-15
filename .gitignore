@@ -1,0 +1,55 @@
+# Logs and databases
+*.log
+*.sql
+*.sqlite
+
+# Operating system generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Node modules and bower components
+node_modules/
+bower_components/
+
+# IDE and text editor generated files
+.idea/
+.vscode/
+*.suo
+*.ntvs_analysis.dat
+*.njsproj
+*.tmproj
+*.tss
+*.bak
+*.cache
+*.sublime-workspace
+*.sublime-project
+
+# Build and distribution directories
+dist/
+build/
+out/
+deploy/
+
+# Environment variables and secrets
+.env
+.env.local
+.env.*.local
+
+# Cache and temporary files
+.cache/
+.tmp/
+.nuxt/
+
+# Package manager lock files
+yarn.lock
+package-lock.json
+
+# Mac metadata
+__MACOSX/
+
+# End of .gitignore

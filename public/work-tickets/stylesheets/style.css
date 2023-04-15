@@ -28,22 +28,42 @@ footer.page-footer {
 }
 
 .close {
-  
   font-size: 20px;
-  
+}
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
 }
 
+.center-align {
+  text-align: center;
+}
 .close-button {
   background: none;
   border: none;
   cursor: pointer;
-  float:right;
+  float: right;
 }
-
 
 .home {
   margin-top: 100px;
   display: flex;
-  justify-content: space-evenly;
-  
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.info-block {
+  flex: 1 1 30%;
+  margin: 15px;
+  padding: 20px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+@media (max-width: 768px) {
+  .info-block {
+    flex-basis: 100%;
+    margin-bottom: 20px;
+  }
 }
